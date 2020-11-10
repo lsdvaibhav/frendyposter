@@ -9,18 +9,6 @@ import os
 
 from download_pdf import *
 
-#-------scraper libraries code ----------------
-
-import warnings
-warnings.filterwarnings('ignore')
-
-from bs4 import BeautifulSoup
-from pprint import pprint
-import time
-#------scraper libraries code end-------------
-
-
-
 #-----flask app code-----------
 app = Flask(__name__)
 #-----flask app code end-------
@@ -28,8 +16,6 @@ app = Flask(__name__)
 #----routing landing page--------------------------------
 @app.route('/')
 def home():
-    #call scrapper to get data/df in return
-    #dff = scrap()
     return render_template('index.html')
     
 #----routing pdfViewer code----------------------------------
