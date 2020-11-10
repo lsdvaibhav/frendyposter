@@ -8,7 +8,6 @@ import os
 #------flask libraries code end----------------
 
 from download_pdf import *
-from scrapper import *
 
 #-------scraper libraries code ----------------
 
