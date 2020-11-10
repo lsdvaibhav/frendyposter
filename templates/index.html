@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="-1" />
+	
+	<title>Homepage</title>
+	<!-- Bootstrap core CSS -->
+	<link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+	
+	<style>
+
+	</style>
+	
+</head>
+<body style="padding-top: 56px;">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-lg" style="max-width:1400px;">
+      <a class="navbar-brand" href="/">FRENDY </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Content -->
+  <div class="container-lg" style="max-width:1400px;">
+    <div class="row">
+		<div class="col-lg-3">
+
+			<div class="container-lg">
+				<h3 class="my-2">Filter Category</h3>
+				<div id="alert_wrapper_scrap"></div>
+				<div class="input-group input-group-lg mb-3">
+				 <button type="button"  id="createPDF" onclick="uploadDFpdf('/downloadPDF');" class="btn btn-primary btn-sm btn-block shadow">Create PDFs</button>
+				</div>
+				<div class="form-group mb-3">	
+				  <!-- <button onclick="uploadURLscrap('/scrap');" id="upload_btn_scrap" class="btn btn-primary" >Upload</button> -->
+				  <button class="btn btn-primary  btn-sm d-none" id="loading_btn_pdf" type="button" disabled>
+					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+					Processing...
+				  </button>
+				  <button type="button" id="cancel_btn_pdf" class="btn btn-secondary btn-sm d-none">Cancel</button>
+				</div>
+				<div id="progress_wrapper_pdf" class="d-none">
+				  <label id="progress_status_pdf"></label>
+				  <div class="progress mb-3">
+					<div id="progress_pdf" class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+				<div>
+					<div class="form-inline m-3 ">
+						<label for="bg_color">Color</label>&nbsp;&nbsp;
+						<select class="form-control shadow form-control-sm" id="bg_color">
+						<option value = "pink">PINK</option>
+						<option value = "purple">PURPLE</option>
+						<option value = "yellow">YELLOW </option>
+						</select>
+					</div>
+					<div class="form-inline m-1 ">
+						<label for="sortby">Sort By</label>&nbsp;&nbsp;
+						<select class="form-control shadow form-control-sm" id="sortby">
+						<option value = "H2L">PRICE : high to low </option>
+						<option value = "L2H">PRICE : Low to High </option>
+						<option value = "OH2L">OFFER : high to low </option>
+						<option value = "OL2H">OFFER : Low to High </option>
+						</select>
+					</div>
+					<label for="select-all"><input type="checkbox" id="select-all">&nbsp;&nbsp;Select All</label>
+				</div>
+				<div id="catlist" class="list-group checkbox-list-group">
+				<!-- list of categories displayed over here -->
+				</div>
+				
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					
+				</div>
+        
+    
+
+			</div>
+		</div><!-- /.col-lg-3 -->
+		<div class="col-lg-9">
+			<header class="jumbotron my-1" style="padding: 1rem 1rem;margin-bottom: 1rem;background-color: #ffffff;">
+				<div class="input-group input-group-lg mb-3">
+				  <input type="text" class="form-control shadow" id="scrapURLinput" placeholder="URL to be scraped" aria-label="URL to be scraped" aria-describedby="button-addon2">
+				  <div class="input-group-append">
+					<button class="btn btn-primary shadow " onclick="uploadURLscrap('/scrap');" id="scrapURLbtn" type="button" id="scrap">SCRAP URL</button>
+				  </div>
+				</div>
+				<div class="form-group mb-3">	
+				  <!-- <button onclick="uploadURLscrap('/scrap');" id="upload_btn_scrap" class="btn btn-primary" >Upload</button> -->
+				  <button class="btn btn-primary btn-sm d-none" id="loading_btn_scrap" type="button" disabled>
+					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+					Processing...
+				  </button>
+				  <button type="button" id="cancel_btn_scrap" class="btn btn-sm btn-secondary d-none">Cancel</button>
+				</div>
+				<div id="progress_wrapper_scrap" class="d-none">
+				  <label id="progress_status_scrap"></label>
+				  <div class="progress mb-3">
+					<div id="progress_scrap" class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+			</header>
+			<div>
+				<label for="selectAllItems"><input type="checkbox" id="selectAllItems">&nbsp;&nbsp;Select All</label>
+				<div class="row" style="overflow-y:scroll; height: 456px;" id ="itemsgrids"></div>
+			</div><!-- /.row -->
+		</div><!-- /.col-lg-9 -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+	
+	<!-- Bootstrap core JavaScript -->
+	<script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/script1.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/script2.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/script3.js') }}"></script>
+ 
+  
+</body>
+</html>
